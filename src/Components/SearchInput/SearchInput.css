@@ -1,0 +1,10 @@
+.search-employee input {
+  width: 100%;
+  outline: none;
+  border-width: 0px 0px 2px;
+  border-color: var(--border-color);
+}
+
+.search-employee input:focus {
+  border-color: black;
+}

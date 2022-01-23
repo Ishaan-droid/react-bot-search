@@ -1,0 +1,25 @@
+.employee {
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  border-width: 1.5px;
+  padding: 10px;
+}
+
+.employee img {
+  width: 70%;
+  height: 15vh;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  border-width: 1.5px;
+  margin-top: 20px;
+}
+
+.employee h1 {
+  text-transform: uppercase;
+}
+
+.employee p {
+  margin-bottom: 0;
+  margin-left: 1rem;
+  color: var(--text-color);
+}

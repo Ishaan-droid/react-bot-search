@@ -1,0 +1,14 @@
+.my-button {
+  background-color: transparent;
+  border: none;
+  color: rgb(141, 138, 138);
+  position: relative;
+  font-size: 2.5rem;
+  line-height: normal;
+  font-family: auto;
+  font-weight: 300;
+}
+
+.my-button:hover {
+  color: black;
+}

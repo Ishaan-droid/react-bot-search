@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const HATCHWAY_URL = 'https://api.hatchways.io/assessment/students';
 
-const fetchData = async setData => {
+const fetchData = setData => {
   axios
     .get(HATCHWAY_URL)
     .then(res => setData(res.data))

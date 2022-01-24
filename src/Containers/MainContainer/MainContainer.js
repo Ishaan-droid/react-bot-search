@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
-import './MainContainer.css';
 import Employee from '../../Components/Employee/Employee';
 import SearchContainer from '../SearchContainer/SearchContainer';
 import fetchData from '../../Service/Api';
+
+import './MainContainer.css';
 
 const MainContainer = () => {
   const [data, setData] = useState([]);
@@ -15,7 +16,6 @@ const MainContainer = () => {
   const [searchTag, setSearchTag] = useState('');
 
   useEffect(() => {
-    // axios.get('https://api.hatchways.io/assessment/students').then(res => setData(res.data));
     fetchData(setData);
   }, []);
 
@@ -27,13 +27,7 @@ const MainContainer = () => {
 
   useEffect(() => {
     const { tagId, tagValue } = tag;
-    const viewTags =
-      students &&
-      students.map(cur => {
-        if (cur.id === tagId) {
-          cur.tags.push(tagValue);
-        }
-      });
+    const viewTags = students && students.map(cur => cur.id === tagId && cur.tags.push(tagValue));
     setData(prevValue => {
       return {
         ...prevValue,
@@ -48,11 +42,14 @@ const MainContainer = () => {
   const grades = students && students.map(cur => cur.grades);
 
   // Configuring averages here to reduce time complexity
-  const averages =
-    grades &&
-    grades.map(
-      cur => cur.reduce((acc, individualGrades) => (acc += +individualGrades), 0) / cur.length
-    );
+  const averages = useMemo(
+    () =>
+      grades &&
+      grades.map(
+        cur => cur.reduce((acc, individualGrades) => (acc += +individualGrades), 0) / cur.length
+      ),
+    [grades]
+  );
 
   const addTagHandler = (e, id) => {
     if (e.key === 'Enter' && e.target.value !== '') {
@@ -80,22 +77,20 @@ const MainContainer = () => {
         if (searchTag === '') return cur;
         if (tagStr.includes(searchTag)) return cur;
       })
-      .map((cur, idx) => {
-        return (
-          <Employee
-            key={cur.id}
-            emp_image={cur.pic}
-            emp_name={`${cur.firstName} ${cur.lastName}`}
-            emp_email={cur.email}
-            emp_company={cur.company}
-            emp_skill={cur.skill}
-            emp_average={averages[idx]}
-            emp_grades={grades[idx]}
-            addTagWithEnter={e => addTagHandler(e, cur.id)}
-            showTags={cur.tags}
-          />
-        );
-      });
+      .map((cur, idx) => (
+        <Employee
+          key={cur.id}
+          emp_image={cur.pic}
+          emp_name={`${cur.firstName} ${cur.lastName}`}
+          emp_email={cur.email}
+          emp_company={cur.company}
+          emp_skill={cur.skill}
+          emp_average={averages[idx]}
+          emp_grades={grades[idx]}
+          addTagWithEnter={e => addTagHandler(e, cur.id)}
+          showTags={cur.tags}
+        />
+      ));
 
   return (
     <div className="main-container pt-2">

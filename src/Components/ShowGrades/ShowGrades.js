@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ShowGrades = ({ grades }) => {
   return (
     <div className="mt-3 mb-3">
@@ -8,6 +10,10 @@ const ShowGrades = ({ grades }) => {
       ))}
     </div>
   );
+};
+
+ShowGrades.propTypes = {
+  grades: PropTypes.array,
 };
 
 export default ShowGrades;

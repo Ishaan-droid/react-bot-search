@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import './Employee.css';
 import { Row, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import ShowGrades from '../ShowGrades/ShowGrades';
 import SearchInput from '../SearchInput/SearchInput';
@@ -51,6 +52,18 @@ const Employee = ({
       </Row>
     </div>
   );
+};
+
+Employee.propTypes = {
+  emp_name: PropTypes.string,
+  emp_email: PropTypes.string,
+  emp_company: PropTypes.string,
+  emp_skill: PropTypes.string,
+  emp_average: PropTypes.number,
+  emp_grades: PropTypes.array,
+  onChangeHandler: PropTypes.func,
+  addTagWithEnter: PropTypes.func,
+  showTags: PropTypes.array,
 };
 
 export default Employee;

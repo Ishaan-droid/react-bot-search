@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
+
 import './SearchInput.css';
 
-const SearchEmployee = ({
+const SearchInput = ({
   search_word,
   searchEmployeeHandler,
   search_name,
@@ -21,4 +23,12 @@ const SearchEmployee = ({
   );
 };
 
-export default SearchEmployee;
+SearchInput.propTypes = {
+  search_word: PropTypes.string,
+  searchEmployeeHandler: PropTypes.func,
+  search_name: PropTypes.string,
+  search_value: PropTypes.string,
+  addTagWithEnter: PropTypes.func,
+};
+
+export default SearchInput;
